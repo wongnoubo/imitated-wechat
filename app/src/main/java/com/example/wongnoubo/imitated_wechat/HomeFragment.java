@@ -1,12 +1,16 @@
 package com.example.wongnoubo.imitated_wechat;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -18,6 +22,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private static final String TAG="HomeFragment";
+//    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -50,6 +56,20 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button Button_home= (Button) getActivity().findViewById(R.id.Button_home);
+
+        Button_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"点击首页");
+            }
+        });
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,4 +125,17 @@ public class HomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+//    private void showDialog(){
+//        dialog.setTitle(TAG+": 仿微信界面实践");
+//        dialog.setMessage(TAG);
+//        dialog.setCancelable(false);
+//        dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Log.d(TAG,"按键点击");
+//            }
+//        });
+//        dialog.show();
+//    }
 }

@@ -1,22 +1,29 @@
 package com.example.wongnoubo.imitated_wechat;
 
+import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
-
 import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.example.wongnoubo.imitated_wechat.AddressFragment;
+import com.example.wongnoubo.imitated_wechat.SportFragment;
+import com.example.wongnoubo.imitated_wechat.MineFragment;
+import com.example.wongnoubo.imitated_wechat.HomeFragment;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,AddressFragment.OnFragmentInteractionListener,SportFragment.OnFragmentInteractionListener,MineFragment.OnFragmentInteractionListener,HomeFragment.OnFragmentInteractionListener{
     private static final String TAG="MainActivity";
     private ViewPager viewPager;
     private LinearLayout mTabHomePage;
@@ -26,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btnHomePage,btnAddress,btnStepNumber,btnMine;
     private PagerAdapter mPagerAdapter;
     private List<View> mViews = new ArrayList<View>();
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,18 +74,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(currentItem){
                     case 0:
                         btnHomePage.setImageResource(R.drawable.shouye_press);
+                        replaceAddressFragment(new HomeFragment());
                         Log.d(TAG,"滑动主页");
                         break;
                     case 1:
                         btnAddress.setImageResource(R.drawable.faxian_press);
+                        replaceAddressFragment(new AddressFragment());
                         Log.d(TAG,"滑动地址");
                         break;
                     case 2:
                         btnStepNumber.setImageResource(R.drawable.yundong_press);
+                        replaceAddressFragment(new SportFragment());
                         Log.d(TAG,"滑动步数");
                         break;
                     case 3:
                         btnMine.setImageResource(R.drawable.wo_press);
+                        replaceAddressFragment(new MineFragment());
                         Log.d(TAG,"滑动我的");
                         break;
                     default:
@@ -142,21 +158,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tab_step:
                 viewPager.setCurrentItem(2);
                 btnStepNumber.setImageResource(R.drawable.yundong_press);
+                replaceAddressFragment(new SportFragment());
                 Log.d(TAG,"点击步数");
                 break;
             case R.id.tab_address:
                 viewPager.setCurrentItem(1);
                 btnAddress.setImageResource(R.drawable.faxian_press);
+                replaceAddressFragment(new AddressFragment());
                 Log.d(TAG,"点击地址");
                 break;
             case R.id.tab_mine:
                 viewPager.setCurrentItem(3);
                 btnMine.setImageResource(R.drawable.wo_press);
+                replaceAddressFragment(new MineFragment());
                 Log.d(TAG,"点击我的");
                 break;
             case R.id.tab_homepage:
                 viewPager.setCurrentItem(0);
                 btnHomePage.setImageResource(R.drawable.shouye_press);
+                replaceAddressFragment(new HomeFragment());
                 Log.d(TAG,"点击首页");
                 break;
             default:
@@ -172,5 +192,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMine.setImageResource(R.drawable.wo);
         btnStepNumber.setImageResource(R.drawable.yundong);
         btnAddress.setImageResource(R.drawable.faxian);
+    }
+
+    /**
+     * 动态切换Fragment
+     */
+    private void replaceAddressFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.address_layout,fragment);
+        transaction.commit();
     }
 }

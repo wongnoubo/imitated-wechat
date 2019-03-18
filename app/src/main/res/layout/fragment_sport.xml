@@ -12,4 +12,9 @@
         android:text="sport_fragment"
         android:textSize="40sp"/>
 
+    <Button
+        android:id="@+id/Button_sport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取信息" />
 </FrameLayout>
