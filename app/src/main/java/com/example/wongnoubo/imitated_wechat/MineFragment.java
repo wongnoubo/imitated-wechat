@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -63,6 +64,12 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"点击我的");
+                getActivity().runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+                        Toast.makeText(getActivity().getApplicationContext(),"MineFragment",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

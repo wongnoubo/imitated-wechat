@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -57,12 +59,21 @@ public class AddressFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (getActivity() == null)
+            return;
         Button Button_home= (Button) getActivity().findViewById(R.id.Button_address);
+
 
         Button_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"点击位置");
+                getActivity().runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+                        Toast.makeText(getActivity().getApplicationContext(),"AddressFragment",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -121,4 +132,5 @@ public class AddressFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

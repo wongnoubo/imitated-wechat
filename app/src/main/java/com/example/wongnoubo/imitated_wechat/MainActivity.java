@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, getClass().getSimpleName());
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();//隐藏标题栏
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG,"切换Fragment");
+                btnHomePage.setImageResource(R.drawable.shouye_press);
+                replaceAddressFragment(new HomeFragment());
+            }
+        }).start();
         initViews();
         initEvents();
     }
@@ -151,6 +159,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(mPagerAdapter);
     }
 
+    /**
+     * 点击翻页
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         resetImg();
